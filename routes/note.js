@@ -13,12 +13,13 @@ router.param('id', (req, res, next, id) => {
   });
 });
 
-router.get('/notes', note.index);
-router.get('/notes/new', note.newNote);
-router.get('/notes/:id', note.show);
-router.get('/notes/:id/edit', note.edit);
-router.put('/notes/:id', note.update);
-router.delete('/notes/:id', note.destroy);
-router.post('/notes', note.create);
+router
+  .get('/notes', note.index)
+  .get('/notes/new', note.new)
+  .post('/notes', note.create)
+  .get('/notes/:id', note.show)
+  .get('/notes/:id/edit', note.edit)
+  .put('/notes/:id', note.update)
+  .delete('/notes/:id', note.destroy);
 
 module.exports = router;

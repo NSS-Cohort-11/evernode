@@ -3,6 +3,30 @@
 const Note = require('../models/note');
 
 module.exports = {
+  index (req, res) {
+    Note.find({}, (err, notes) => {
+      if (err) throw err;
+
+      res.render('notes-index', {notes: notes});
+    });
+  },
+
+  new (req, res) {
+    res.render('new-note');
+  },
+
+  create (req, res) {
+    Note.create(req.body, (err, note) => {
+      if (err) throw err;
+
+      res.redirect(`/notes/${note._id}`);
+    });
+  },
+
+  show (req, res) {
+    res.render('show-note', {note: req.note});
+  },
+
   edit (req, res) {
     res.render('new-note', {note: req.note});
   },
@@ -12,30 +36,6 @@ module.exports = {
       if (err) throw err;
 
       res.redirect(`/notes/${req.note._id}`);
-    });
-  },
-
-  index (req, res) {
-    Note.find({}, (err, notes) => {
-      if (err) throw err;
-
-      res.render('notes-index', {notes: notes});
-    });
-  },
-
-  newNote (req, res) {
-    res.render('new-note');
-  },
-
-  show (req, res) {
-    res.render('show-note', {note: req.note});
-  },
-
-  create (req, res) {
-    Note.create(req.body, (err, note) => {
-      if (err) throw err;
-
-      res.redirect(`/notes/${note._id}`);
     });
   },
 
