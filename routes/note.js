@@ -1,7 +1,17 @@
 const express = require('express');
 const router = express.Router();
 
+const Note = require('../models/note');
 const note = require('../controllers/note');
+
+router.param('id', (req, res, next, id) => {
+  Note.findById(id, (err, note) => {
+    if (err) throw err;
+
+    req.note = note;
+    next();
+  });
+});
 
 router.get('/notes', note.index);
 router.get('/notes/new', note.newNote);
