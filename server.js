@@ -26,11 +26,19 @@ app.get('/notes/new', (req, res) => {
   res.render('new-note');
 });
 
-app.post('/notes', (req, res) => {
-  Note.create(req.body, (err) => {
+app.get('/notes/:id', (req, res) => {
+  Note.findById(req.params.id, (err, note) => {
     if (err) throw err;
 
-    res.redirect('/');
+    res.render('show-note', {note: note});
+  });
+});
+
+app.post('/notes', (req, res) => {
+  Note.create(req.body, (err, note) => {
+    if (err) throw err;
+
+    res.redirect(`/notes/${note._id}`);
   });
 });
 
