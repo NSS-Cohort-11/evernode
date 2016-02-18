@@ -2,6 +2,7 @@
 
 const bodyParser = require('body-parser');
 const express = require('express');
+const methodOverride = require('method-override');
 const mongoose = require('mongoose');
 
 const note = require('./routes/note');
@@ -14,6 +15,7 @@ app.set('view engine', 'jade');
 app.use(bodyParser.urlencoded({
   extended: false
 }));
+app.use(methodOverride('_method'));
 
 app.get('/', (req, res) => {
   res.send('Server Running');
