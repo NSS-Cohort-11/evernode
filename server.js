@@ -5,6 +5,7 @@ const express = require('express');
 const methodOverride = require('method-override');
 const mongoose = require('mongoose');
 
+const logger = require('./lib/logger');
 const note = require('./routes/note');
 
 const app = express();
@@ -16,6 +17,7 @@ app.use(bodyParser.urlencoded({
   extended: false
 }));
 app.use(methodOverride('_method'));
+app.use(logger);
 
 app.get('/', (req, res) => {
   res.send('Server Running');
