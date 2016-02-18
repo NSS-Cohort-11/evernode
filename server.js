@@ -7,10 +7,7 @@ const mongoose = require('mongoose');
 const app = express();
 const port = process.env.PORT || 3000;
 
-const Note = mongoose.model('Notes', mongoose.Schema({
-  title: String,
-  text: String
-}));
+const Note = require('./models/note');
 
 app.set('view engine', 'jade');
 
