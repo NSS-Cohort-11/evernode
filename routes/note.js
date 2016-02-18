@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const Note = require('../models/note');
-const note = require('../controllers/note');
+const ctrl = require('../controllers/note');
 
 router.param('id', (req, res, next, id) => {
   Note.findById(id, (err, note) => {
@@ -14,12 +14,12 @@ router.param('id', (req, res, next, id) => {
 });
 
 router
-  .get('/notes', note.index)
-  .get('/notes/new', note.new)
-  .post('/notes', note.create)
-  .get('/notes/:id', note.show)
-  .get('/notes/:id/edit', note.edit)
-  .put('/notes/:id', note.update)
-  .delete('/notes/:id', note.destroy);
+  .get('/notes', ctrl.index)
+  .get('/notes/new', ctrl.new)
+  .post('/notes', ctrl.create)
+  .get('/notes/:id', ctrl.show)
+  .get('/notes/:id/edit', ctrl.edit)
+  .put('/notes/:id', ctrl.update)
+  .delete('/notes/:id', ctrl.destroy);
 
 module.exports = router;
