@@ -1,0 +1,12 @@
+h1 Categories
+
+table
+  thead
+    tr
+      th Name
+      th Description
+  tbody
+    for cat in categories
+      tr
+        td= cat.name
+        td= cat.description

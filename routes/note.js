@@ -1,16 +1,22 @@
+'use strict';
+
 const express = require('express');
 const router = express.Router();
 
 const Note = require('../models/note');
+
 const ctrl = require('../controllers/note');
 
 router.param('id', (req, res, next, id) => {
-  Note.findById(id, (err, note) => {
-    if (err) throw err;
+  Note
+    .findById(id)
+    .populate('category')
+    .exec((err, note) => {
+      if (err) throw err;
 
-    req.note = note;
-    next();
-  });
+      req.note = note;
+      next();
+    });
 });
 
 router

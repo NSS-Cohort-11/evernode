@@ -1,0 +1,10 @@
+h1 category-show
+
+p name #{category.name}
+p description #{category.description}
+
+h2 notes in category
+
+ul
+  for note in category.notes
+    li title #{note.title}
